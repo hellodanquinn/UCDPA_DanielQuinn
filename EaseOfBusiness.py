@@ -18,3 +18,12 @@ print(type(l_array))
 hdg = "128"
 print(hdg + " Success")
 
+# import pandas as pd
+# Read data from the csv file
+data = pd.read_csv("Rankings_EaseOf.csv")
+
+# Preview data from the first 5 lines
+data.head()
+
+print(data.head())
+
