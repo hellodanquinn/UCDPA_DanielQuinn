@@ -29,6 +29,12 @@ data = pd.read_csv("Rankings_EaseOf.csv")
 # Preview data from the first 5 lines
 print(data.head())
 
+#Show datatypes
+print(data.dtypes)
+
+#temp
+print(len(data.Economy.unique()))
+
 # iterating the columns
 for col in data.columns:
     print(col)
@@ -56,3 +62,4 @@ def country_to_alpha(country_name):
 # Test to validate
 country_name = 'Ireland'
 print((country_name) + " has Alpha2 " + country_to_alpha(country_name))
+
