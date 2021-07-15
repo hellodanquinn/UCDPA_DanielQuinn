@@ -83,13 +83,11 @@ print((country_name) + " is a country in " + country_to_continent(country_name))
 
 def country_to_alpha(country_name):
     country_alpha2 = pc.country_name_to_country_alpha2(country_name)
-#    country_continent_code = pc.country_alpha2_to_continent_code(country_alpha2)
-#    country_continent_name = pc.convert_continent_code_to_continent_name(country_continent_code)
     return country_alpha2
 
 # Test to validate country_to_alpha
 country_name = 'Ireland'
-print((country_name) + " has Alpha2 " + country_to_alpha(country_name))
+print((country_name) + " is Alpha2 " + country_to_alpha(country_name))
 
 # Use a dictionary to create a column so I can add Alpha3 codes to rows in the table
 # *NOTE I feel it would be better to use a dataset and have since added a 2nd CSV for this operation
@@ -117,10 +115,6 @@ dataEU = data.loc[['Austria','Italy','Belgium','Latvia','Bulgaria','Lithuania','
           'Hungary','Sweden','Ireland']]
 print(dataEU)
 
-# Set index
-dataEU.set_index("Economy", inplace=True)
-dataEU.head()
-
 # Check for missing values on dataEU
 missing_values_count = dataEU.isnull()
 print(missing_values_count)
@@ -129,23 +123,18 @@ print(missing_values_count)
 # Create group for LATIN AMERICAN COUNTRIES
 dataSA = data.loc[['Brazil','Mexico','Colombia','Argentina','Peru','Venezuela, RB','Chile','Guatemala','Ecuador',
           'Bolivia','Haiti','Dominican Republic','Honduras','Paraguay','El Salvador','Nicaragua','Costa Rica',
-         'Puerto Rico', 'Panama', 'Uruguay']]
+         'Puerto Rico','Panama','Uruguay']]
 print(dataSA)
-
-# Set index
-# dataSA.set_index("Economy", inplace=True)
-dataSA.head()
 
 # Check for missing values on dataSA
 missing_values_count2 = dataSA.isnull()
 print(missing_values_count2)
 
-# Merge EU ans SA
+# Merge on dataSA and dataEU
 EUSA=pd.merge(data,
                 datab[['Alpha3']],
                 on='Economy')
-EUSA
-EUSA.head(5)
+print(EUSA)
 
 
 
