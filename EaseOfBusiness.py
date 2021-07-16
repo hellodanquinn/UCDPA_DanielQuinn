@@ -21,10 +21,10 @@ import matplotlib as plt
 # print("Numpy Version " + np.__version__)
 # print("seaborn " + sns.__version__)
 # print("matplotlib " + plt.__version__)
-#  code to test numpy
-# l = [1, 2, 3]
-# l_array = np.array(l)
-# print(type(l_array))
+# code to test numpy
+# C = [Eur, SAmerica, NAmerica]
+# l_array = np.array(C)
+# print(type(C_array))
 
 # Read data from the csv file(s)
 data = pd.read_csv("Rankings_EaseOfBus.csv")
@@ -32,6 +32,18 @@ datab = pd.read_csv("alpha.csv")
 # Preview each file data
 print(data.head(5))
 print(datab.head(5))
+
+# Numpy arrays to group countries *NOT USED LATER*
+Eur = np.array(['Austria','Italy','Belgium','Latvia','Bulgaria','Lithuania','Croatia','Luxembourg',
+          'Cyprus','Malta','Czech Republic','Netherlands','Denmark','Poland','Estonia','Portugal',
+          'Finland','Romania','France','Slovak Republic','Germany','Slovenia','Greece','Spain',
+          'Hungary','Sweden','Ireland'])
+print("This should display EIRE, also known as - " + Eur[-1])
+
+Latam = np.array(['Brazil','Mexico','Colombia','Argentina','Peru','Venezuela, RB','Chile','Guatemala','Ecuador',
+          'Bolivia','Haiti','Dominican Republic','Honduras','Paraguay','El Salvador','Nicaragua','Costa Rica',
+         'Puerto Rico','Panama','Uruguay'])
+print("This should display GATEWAY TO SOUTH AMERICA, also know as - " + Latam[2])
 
 # drop rows that contain null values
 # Pre clean
@@ -92,21 +104,21 @@ print((country_name) + " is Alpha2 " + country_to_alpha(country_name))
 # Use a dictionary to create a column so I can add Alpha3 codes to rows in the table
 # *NOTE I feel it would be better to use a dataset and have since added a 2nd CSV for this operation
 
-# alphaTEST = {'Austria': 'AUT', 'Italy': 'ITA','Belgium': 'BEL', 'Latvia': 'LVA', 'Bulgaria': 'BGR', 'Lithuania': 'LTU',
-#        'Croatia': 'HRV', 'Luxembourg': 'LUX', 'Cyprus': 'CYP', 'Malta': 'MLT', 'Czech Republic': 'CZE',
-#        'Netherlands': 'NLD', 'Denmark': 'DNK', 'Poland': 'POL', 'Estonia': 'EST', 'Portugal': 'PRT', 'Finland': 'FIN',
-#        'Romania': 'ROU', 'France': 'FRA', 'Slovak Republic': 'SVK', 'Germany': 'DEU', 'Spain': 'ESP', 'Hungary': 'HUN',
-#        'Sweden': 'SWE', 'Ireland': 'IRL', 'Greece': 'GRC', 'Brazil': 'BRA', 'Mexico': 'MEX', 'Argentina': 'ARG', 'Colombia': 'COL',
-#        'Argentina': 'ARG', 'Peru': 'PER', 'Venezuela, RB': 'VEN', 'Chile': 'CHL', 'Guatemala': 'GTM',
-#        'Ecuador': 'ECU', 'Bolivia': 'BOL', 'Haiti': 'HTI', 'Dominican Republic': 'DOM', 'Honduras': 'HND',
-#        'Paraguay': 'PRY', 'El Salvador': 'SLV', 'Nicaragua': 'NIC', 'Costa Rica': 'CRI', 'Puerto Rico': 'PRI',
-#        'Panama': 'PAN'}
-# print(alphaTEST['Austria'])       # Test an entry from the dictionary
-# print('France' in alphaTEST)     # Verify dictionary has a given key
-# alphaTEST['Uruguay'] = 'URY'     # Set a new entry
-# print(alphaTEST['Uruguay'])      # Test this
-# DEN = (data.loc['Denmark'])
-# print(DEN)
+alphaTEST = {'Austria': 'AUT', 'Italy': 'ITA','Belgium': 'BEL', 'Latvia': 'LVA', 'Bulgaria': 'BGR', 'Lithuania': 'LTU',
+        'Croatia': 'HRV', 'Luxembourg': 'LUX', 'Cyprus': 'CYP', 'Malta': 'MLT', 'Czech Republic': 'CZE',
+        'Netherlands': 'NLD', 'Denmark': 'DNK', 'Poland': 'POL', 'Estonia': 'EST', 'Portugal': 'PRT', 'Finland': 'FIN',
+        'Romania': 'ROU', 'France': 'FRA', 'Slovak Republic': 'SVK', 'Germany': 'DEU', 'Spain': 'ESP', 'Hungary': 'HUN',
+        'Sweden': 'SWE', 'Ireland': 'IRL', 'Greece': 'GRC', 'Brazil': 'BRA', 'Mexico': 'MEX', 'Colombia': 'COL',
+        'Argentina': 'ARG', 'Peru': 'PER', 'Venezuela, RB': 'VEN', 'Chile': 'CHL', 'Guatemala': 'GTM',
+        'Ecuador': 'ECU', 'Bolivia': 'BOL', 'Haiti': 'HTI', 'Dominican Republic': 'DOM', 'Honduras': 'HND',
+        'Paraguay': 'PRY', 'El Salvador': 'SLV', 'Nicaragua': 'NIC', 'Costa Rica': 'CRI', 'Puerto Rico': 'PRI',
+        'Panama': 'PAN'}
+print(alphaTEST['Austria'])       # Test an entry from the dictionary
+print('France' in alphaTEST)     # Verify dictionary has a given key
+alphaTEST['Uruguay'] = 'URY'     # Set a new entry
+print(alphaTEST['Uruguay'])      # Test this
+DEN = (data.loc['Denmark'])
+print(DEN)
 
 # Create group for EUROPEAN COUNTRIES
 dataEU = data.loc[['Austria','Italy','Belgium','Latvia','Bulgaria','Lithuania','Croatia','Luxembourg',
@@ -136,5 +148,9 @@ EUSA=pd.merge(data,
                 on='Economy')
 print(EUSA)
 
+# Test matplotlib
+import matplotlib.pyplot
 
-
+fig, simple_chart = plt.pyplot.subplots()
+simple_chart.plot(dataSA.globalRank)
+plt.pyplot.show()
