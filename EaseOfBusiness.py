@@ -1,8 +1,9 @@
 import pandas as pd
 import numpy as np
 import pycountry_convert as pc
-import seaborn as sns
-import matplotlib as plt
+import matplotlib.pyplot as plt
+# import seaborn as sns
+
 
 # Actions to be taken
 # Install/test 'pycountry-convert'
@@ -34,16 +35,16 @@ print(data.head(5))
 print(datab.head(5))
 
 # Numpy arrays to group countries *NOT USED LATER*
-Eur = np.array(['Austria','Italy','Belgium','Latvia','Bulgaria','Lithuania','Croatia','Luxembourg',
-          'Cyprus','Malta','Czech Republic','Netherlands','Denmark','Poland','Estonia','Portugal',
-          'Finland','Romania','France','Slovak Republic','Germany','Slovenia','Greece','Spain',
-          'Hungary','Sweden','Ireland'])
-print("This should display EIRE, also known as - " + Eur[-1])
+Eur = np.array(['Austria', 'Italy', 'Belgium', 'Latvia', 'Bulgaria', 'Lithuania', 'Croatia', 'Luxembourg',
+          'Cyprus', 'Malta', 'Czech Republic', 'Netherlands', 'Denmark', 'Poland', 'Estonia', 'Portugal',
+          'Finland', 'Romania', 'France', 'Slovak Republic', 'Germany', 'Slovenia', 'Greece', 'Spain',
+          'Hungary', 'Sweden', 'Ireland'])
+print(Eur[-1] + " - is also known as EIRE" )
 
-Latam = np.array(['Brazil','Mexico','Colombia','Argentina','Peru','Venezuela, RB','Chile','Guatemala','Ecuador',
-          'Bolivia','Haiti','Dominican Republic','Honduras','Paraguay','El Salvador','Nicaragua','Costa Rica',
-         'Puerto Rico','Panama','Uruguay'])
-print("This should display GATEWAY TO SOUTH AMERICA, also know as - " + Latam[2])
+Latam = np.array(['Brazil', 'Mexico', 'Colombia', 'Argentina', 'Peru', 'Venezuela, RB', 'Chile', 'Guatemala', 'Ecuador',
+          'Bolivia', 'Haiti', 'Dominican Republic', 'Honduras', 'Paraguay', 'El Salvador', 'Nicaragua', 'Costa Rica',
+         'Puerto Rico', 'Panama', 'Uruguay'])
+print(Latam[2] + " - is also known as the GATEWAY TO SOUTH AMERICA")
 
 # drop rows that contain null values
 # Pre clean
@@ -77,11 +78,6 @@ for col in data.columns:
     print(col)
 
 # FUNCTION(s)
-# function to convert to alpha3 country codes and continents (may use later)
-# country_code = pc.country_name_to_country_alpha3("China", cn_name_format="default")
-# print(country_code)
-# UNUSED NUMPY REFERENCE
-
 # Test of pycountry_convert
 def country_to_continent(country_name):
     country_alpha2 = pc.country_name_to_country_alpha2(country_name)
@@ -99,7 +95,7 @@ def country_to_alpha(country_name):
 
 # Test to validate country_to_alpha
 country_name = 'Ireland'
-print((country_name) + " is Alpha2 " + country_to_alpha(country_name))
+print((country_name) + " has Alpha2 " + country_to_alpha(country_name))
 
 # Use a dictionary to create a column so I can add Alpha3 codes to rows in the table
 # *NOTE I feel it would be better to use a dataset and have since added a 2nd CSV for this operation
@@ -113,11 +109,11 @@ alphaTEST = {'Austria': 'AUT', 'Italy': 'ITA','Belgium': 'BEL', 'Latvia': 'LVA',
         'Ecuador': 'ECU', 'Bolivia': 'BOL', 'Haiti': 'HTI', 'Dominican Republic': 'DOM', 'Honduras': 'HND',
         'Paraguay': 'PRY', 'El Salvador': 'SLV', 'Nicaragua': 'NIC', 'Costa Rica': 'CRI', 'Puerto Rico': 'PRI',
         'Panama': 'PAN'}
-print(alphaTEST['Austria'])       # Test an entry from the dictionary
+print(alphaTEST['Austria'])      # Test an entry from the dictionary
 print('France' in alphaTEST)     # Verify dictionary has a given key
-alphaTEST['Uruguay'] = 'URY'     # Set a new entry
+alphaTEST['Uruguay'] = 'URY'     # Set a new entry by adding another country
 print(alphaTEST['Uruguay'])      # Test this
-DEN = (data.loc['Denmark'])
+DEN = (data.loc['Denmark'])      # Show data for Denmark
 print(DEN)
 
 # Create group for EUROPEAN COUNTRIES
@@ -142,6 +138,26 @@ print(dataSA)
 missing_values_count2 = dataSA.isnull()
 print(missing_values_count2)
 
+# Merge on Alpha3 / Economy dataEU
+dataEU=pd.merge(dataEU,
+                datab[['Alpha3']],
+                on='Economy')
+print(dataEU)
+
+dataEU.set_index("Alpha3", inplace=True)
+print(dataEU.head())
+
+# Merge on Alpha3 / Economy dataSA
+
+dataSA=pd.merge(dataSA,
+                datab[['Alpha3']],
+                on='Economy')
+print(dataSA)
+
+dataSA.set_index("Alpha3", inplace=True)
+print(data.head())
+
+
 # Merge on dataSA and dataEU
 EUSA=pd.merge(data,
                 datab[['Alpha3']],
@@ -149,7 +165,6 @@ EUSA=pd.merge(data,
 print(EUSA)
 
 # Test matplotlib
-import matplotlib.pyplot
 
 fig, simple_chart = plt.pyplot.subplots()
 simple_chart.plot(dataSA.globalRank)
