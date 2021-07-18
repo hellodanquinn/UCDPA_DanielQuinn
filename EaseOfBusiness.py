@@ -155,17 +155,86 @@ dataSA=pd.merge(dataSA,
 print(dataSA)
 
 dataSA.set_index("Alpha3", inplace=True)
-print(data.head())
+print(dataSA.head())
 
 
 # Merge on dataSA and dataEU
-EUSA=pd.merge(data,
-                datab[['Alpha3']],
-                on='Economy')
-print(EUSA)
+# EUSA=pd.merge(dataEU,
+#                dataSA[['Alpha3']],
+#                on='Alpha3')
+# print(EUSA)
+# This data uses dataEU and removes any values greater or equal to 70
+visEU = dataEU[~(dataEU['globalRank'] >= 50)]
+print(visEU)
+
+visSA = dataSA[~(dataSA['globalRank'] >= 50)]
+print(visSA)
 
 # Test matplotlib
 
-fig, simple_chart = plt.pyplot.subplots()
-simple_chart.plot(dataSA.globalRank)
-plt.pyplot.show()
+plt.plot(dataEU['globalRank'])
+plt.show()
+
+# 1st Demo
+n, bins, patches = plt.hist(visEU['globalRank'],
+                            facecolor='blue',
+                            edgecolor='darkblue',
+                            bins=20)
+print('n: ', n)
+print('bins: ', bins)
+print('patches: ', patches)
+plt.show()
+
+# 2nd demo
+
+# Fixing random state for reproducibility
+# np.random.seed(19680801)
+
+
+plt.rcdefaults()
+fig, ax = plt.subplots()
+
+# Example data
+people = ('Tom', 'Dick', 'Harry', 'Slim', 'Jim')
+y_pos = np.arange(len(people))
+# after people, removed for time being- , labels=people
+performance = 3 + 10 * np.random.rand(len(people))
+error = np.random.rand(len(people))
+
+ax.barh(y_pos, performance, xerr=error, align='center')
+ax.set_yticks(y_pos)
+ax.invert_yaxis()  # labels read top-to-bottom
+ax.set_xlabel('Performance')
+ax.set_title('How fast do you want to go today?')
+
+plt.show()
+
+# 3rd Demo
+# x-coordinates of left sides of bars
+left = [1, 2, 3, 4, 5]
+
+# heights of bars
+height = [10, 24, 36, 40, 5]
+
+# labels for bars
+tick_label = ['one', 'two', 'three', 'four', 'five']
+
+# plotting a bar chart
+plt.bar(left, height, tick_label=tick_label,
+        width=0.8, color=['red', 'green'])
+
+# naming the x-axis
+plt.xlabel('x - axis')
+# naming the y-axis
+plt.ylabel('y - axis')
+# plot title
+plt.title('My bar chart!')
+
+# function to show the plot
+plt.show()
+
+
+
+# fig, simple_chart = matplotlib.pyplot.subplots()
+# simple_chart.plot(dataSA.globalRank)
+# matplotlib.pyplot.show()
