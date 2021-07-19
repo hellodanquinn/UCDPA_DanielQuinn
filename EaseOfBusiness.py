@@ -77,7 +77,7 @@ print(data.shape, droprows.shape)
 for col in data.columns:
     print(col)
 
-# FUNCTION(s)
+# FUNCTION(s) DEMO
 # Test of pycountry_convert
 def country_to_continent(country_name):
     country_alpha2 = pc.country_name_to_country_alpha2(country_name)
@@ -157,84 +157,99 @@ print(dataSA)
 dataSA.set_index("Alpha3", inplace=True)
 print(dataSA.head())
 
-
-# Merge on dataSA and dataEU
-# EUSA=pd.merge(dataEU,
-#                dataSA[['Alpha3']],
-#                on='Alpha3')
-# print(EUSA)
-# This data uses dataEU and removes any values greater or equal to 70
+# This data uses dataEU and removes HIGHER than 70
 visEU = dataEU[~(dataEU['globalRank'] >= 50)]
 print(visEU)
 
-visSA = dataSA[~(dataSA['globalRank'] >= 50)]
+# This data uses South America (LATAM REGION) and removes HIGHER than 100
+visSA = dataSA[~(dataSA['globalRank'] >= 100)]
 print(visSA)
 
-# Test matplotlib
+### DATA Visualisation ###
 
-plt.plot(dataEU['globalRank'])
+# EUROPE #
+plt.plot(visEU['globalRank'], marker = "s", linestyle = ":", color = "darkorange")
+plt.plot(figsize=(20, 12))
+plt.title("EUROPE - Countries with Ranking up to 50")
+plt.xlabel("COUNTRY")
+plt.ylabel("RANKING")
 plt.show()
 
-# 1st Demo
-n, bins, patches = plt.hist(visEU['globalRank'],
-                            facecolor='blue',
-                            edgecolor='darkblue',
-                            bins=20)
-print('n: ', n)
-print('bins: ', bins)
-print('patches: ', patches)
+# SOUTH AMERICA (LATAM) #
+plt.plot(visSA['globalRank'], marker = "s", linestyle = ":", color = "darkorange")
+plt.plot(figsize=(20, 12))
+plt.title("South America (LATAM) - Countries with Ranking up to 100")
+plt.xlabel("COUNTRY")
+plt.ylabel("RANKING")
 plt.show()
 
-# 2nd demo
-
-# Fixing random state for reproducibility
-# np.random.seed(19680801)
-
-
-plt.rcdefaults()
-fig, ax = plt.subplots()
-
-# Example data
-people = ('Tom', 'Dick', 'Harry', 'Slim', 'Jim')
-y_pos = np.arange(len(people))
-# after people, removed for time being- , labels=people
-performance = 3 + 10 * np.random.rand(len(people))
-error = np.random.rand(len(people))
-
-ax.barh(y_pos, performance, xerr=error, align='center')
-ax.set_yticks(y_pos)
-ax.invert_yaxis()  # labels read top-to-bottom
-ax.set_xlabel('Performance')
-ax.set_title('How fast do you want to go today?')
-
+## Trading across Borders ##
+# EUROPE #
+plt.plot(visEU['Trading across borders'], marker = "s", linestyle = ":", color = "darkorange")
+plt.plot(figsize=(20, 12))
+plt.title("EUROPE - Trading Across Borders (Ranking up to 50)")
+plt.xlabel("COUNTRY")
+plt.ylabel("RANKING")
 plt.show()
 
-# 3rd Demo
-# x-coordinates of left sides of bars
-left = [1, 2, 3, 4, 5]
-
-# heights of bars
-height = [10, 24, 36, 40, 5]
-
-# labels for bars
-tick_label = ['one', 'two', 'three', 'four', 'five']
-
-# plotting a bar chart
-plt.bar(left, height, tick_label=tick_label,
-        width=0.8, color=['red', 'green'])
-
-# naming the x-axis
-plt.xlabel('x - axis')
-# naming the y-axis
-plt.ylabel('y - axis')
-# plot title
-plt.title('My bar chart!')
-
-# function to show the plot
+# SOUTH AMERICA (LATAM) #
+plt.plot(visSA['Trading across borders'], marker = "s", linestyle = ":", color = "darkorange")
+plt.plot(figsize=(20, 12))
+plt.title("South America (LATAM) - Trading Across Borders (Ranking up to 100)")
+plt.xlabel("COUNTRY")
+plt.ylabel("RANKING")
 plt.show()
 
 
+## Bar Chart
 
-# fig, simple_chart = matplotlib.pyplot.subplots()
-# simple_chart.plot(dataSA.globalRank)
-# matplotlib.pyplot.show()
+# creating the dataset for Europe
+dataEUR = {'DNK': 4, 'SWE': 10, 'LTV': 11,
+        'LVA': 19, 'FIN': 20}
+countries = list(dataEUR.keys())
+values = list(dataEUR.values())
+
+fig = plt.figure(figsize=(8, 5))
+
+# creating the bar plot
+plt.bar(countries, values, color='blue', edgecolor= 'black',
+        width=0.6)
+
+plt.xlabel("Country")
+plt.ylabel("Ranking")
+plt.title("Top 5 countries in Europe (Ease of Business)")
+plt.show()
+
+# creating the dataset for LATAM (South America)
+dataLAT = {'Chile CHL': 59, 'Mexico MEX': 60, 'Puerto Rico PRI': 65,
+        'Colombia COL': 67, 'Costa Rica CRI': 74}
+countries = list(dataLAT.keys())
+values = list(dataLAT.values())
+
+fig = plt.figure(figsize=(8, 5))
+
+# creating the bar plot
+plt.bar(countries, values, color='blue', edgecolor= 'black',
+        width=0.6)
+
+plt.xlabel("Country")
+plt.ylabel("Ranking")
+plt.title("Top 5 countries in South America (LATAM) - (Ease of Business)")
+plt.show()
+
+## TOP 6 Countries ##
+dataALL = {'DNK': 4, 'SWE': 10, 'LTV': 11,
+        'CHL': 59, 'MEX': 60, 'PRI': 65}
+countries = list(dataALL.keys())
+values = list(dataALL.values())
+
+fig = plt.figure(figsize=(8, 5))
+
+# creating the bar plot
+plt.bar(countries, values, color='orange', edgecolor= 'darkorange',
+        width=0.6)
+
+plt.xlabel("Country")
+plt.ylabel("Ranking")
+plt.title("Top 3 Countries from each region")
+plt.show()
