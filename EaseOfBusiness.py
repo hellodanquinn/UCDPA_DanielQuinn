@@ -211,7 +211,7 @@ values = list(dataEUR.values())
 
 fig = plt.figure(figsize=(8, 5))
 
-# creating the bar plot
+# bar plot - Top 5 countries EU
 plt.bar(countries, values, color='blue', edgecolor= 'black',
         width=0.6)
 
@@ -228,7 +228,7 @@ values = list(dataLAT.values())
 
 fig = plt.figure(figsize=(8, 5))
 
-# creating the bar plot
+# bar plot - South America
 plt.bar(countries, values, color='blue', edgecolor= 'black',
         width=0.6)
 
@@ -237,7 +237,7 @@ plt.ylabel("Ranking")
 plt.title("Top 5 countries in South America (LATAM) - (Ease of Business)")
 plt.show()
 
-## TOP 6 Countries ##
+## TOP 6 Countries - ease of business ##
 dataALL = {'DNK': 4, 'SWE': 10, 'LTV': 11,
         'CHL': 59, 'MEX': 60, 'PRI': 65}
 countries = list(dataALL.keys())
@@ -245,11 +245,28 @@ values = list(dataALL.values())
 
 fig = plt.figure(figsize=(8, 5))
 
-# creating the bar plot
+# bar plot - top 3 countries for each region
 plt.bar(countries, values, color='orange', edgecolor= 'darkorange',
         width=0.6)
 
 plt.xlabel("Country")
 plt.ylabel("Ranking")
-plt.title("Top 3 Countries from each region")
+plt.title("Top 3 Countries from each region - Ease of Business")
+plt.show()
+
+## TOP 6 Countries - starting a business ##
+dataSB = {'GRC':11, 'EST': 14, 'IRL': 23,
+        'PAN': 51, 'CHL': 57, 'PRI': 59}
+countries = list(dataSB.keys())
+values = list(dataSB.values())
+
+fig = plt.figure(figsize=(8, 5))
+
+# bar plot - top 3 countries for each region
+plt.bar(countries, values, color='blue', edgecolor= 'black',
+        width=0.6)
+
+plt.xlabel("Country")
+plt.ylabel("Ranking")
+plt.title("Top 3 Countries from each region - Starting a Business")
 plt.show()
